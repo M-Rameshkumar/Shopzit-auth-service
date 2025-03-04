@@ -25,7 +25,7 @@ public class SimplecorseFilter implements Filter {
 
         // Allow requests from frontend origin
         String originHeader = request.getHeader("Origin");
-        if (originHeader != null && originHeader.equals(clientApiUrl)) {
+        if (originHeader != null && (originHeader.equals(clientApiUrl) || originHeader.equals("http://localhost:5173"))) {
             response.setHeader("Access-Control-Allow-Origin", originHeader);
         } else {
             response.setHeader("Access-Control-Allow-Origin", "*");  // Allow all origins if not specified (for testing purposes)

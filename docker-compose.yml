@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: Shopzit-DB
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ramesh123
+      POSTGRES_DB: AuthShopzit
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - RZ
+
+  backend:
+    build: .
+    container_name: authentication
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/AuthShopzit
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ramesh123
+    ports:
+      - "9080:9080"
+    networks:
+      - RZ
+
+  frontend:
+    build: ../ShopZit-React
+    container_name: Shopzit-FE
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    networks:
+      - RZ
+
+volumes:
+  postgres-data:
+
+networks:
+  RZ:
+    driver: bridge
