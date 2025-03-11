@@ -1,4 +1,4 @@
-package com.midbenchers.service.jwt;
+package com.midbenchers.filter;
 
 import com.midbenchers.entity.User;
 import com.midbenchers.repository.Userrepo;

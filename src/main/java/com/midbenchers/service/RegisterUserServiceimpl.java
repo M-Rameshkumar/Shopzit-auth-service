@@ -1,4 +1,4 @@
-package com.midbenchers.service.auth;
+package com.midbenchers.service;
 
 
 
@@ -6,6 +6,8 @@ import com.midbenchers.dto.RegisterUser;
 import com.midbenchers.dto.Userdto;
 import com.midbenchers.entity.User;
 import com.midbenchers.enums.UserRole;
+import com.midbenchers.mongo.Profile_entity;
+import com.midbenchers.mongo.Profilerepo;
 import com.midbenchers.repository.Userrepo;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -30,6 +32,9 @@ public class RegisterUserServiceimpl{
 
 
     @Autowired
+    private Profilerepo profilerepo;
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     private static final Logger logger= LoggerFactory.getLogger(RegisterUserServiceimpl.class);
@@ -44,6 +49,7 @@ public class RegisterUserServiceimpl{
           return new ResponseEntity<>("user already Exist",HttpStatus.CONFLICT);
       }
 
+
             User data= new User();
 
         data.setName(user.getName());
@@ -53,6 +59,15 @@ public class RegisterUserServiceimpl{
 
 
         User createduser= userrepo.save(data);
+
+
+        Profile_entity profile= new Profile_entity(
+
+                createduser.getId(),"","","",0l
+        );
+
+        profilerepo.save(profile);
+
 
          Userdto dto= new Userdto();
          dto.setId(createduser.getId());

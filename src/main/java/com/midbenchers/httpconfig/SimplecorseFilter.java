@@ -1,4 +1,4 @@
-package com.midbenchers.config;
+package com.midbenchers.httpconfig;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

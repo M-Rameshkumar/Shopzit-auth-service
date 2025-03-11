@@ -6,7 +6,7 @@ import com.midbenchers.dto.LoginAuthentication;
 import com.midbenchers.dto.RegisterUser;
 import com.midbenchers.entity.User;
 import com.midbenchers.repository.Userrepo;
-import com.midbenchers.service.auth.RegisterUserServiceimpl;
+import com.midbenchers.service.RegisterUserServiceimpl;
 import com.midbenchers.utilli.Jwtutill;
 
 import org.slf4j.Logger;
@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.midbenchers.config;
+package com.midbenchers.httpconfig;
 
 import com.midbenchers.filter.JwtAuthenticationfilter;
 import org.springframework.context.annotation.Bean;
@@ -30,17 +30,18 @@ public class SpringSecurityconfig {
         return http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth ->
                         auth
+
                                 .requestMatchers("/ecom/authentication", "/ecom/reg").permitAll()  // Public endpoints
-                                .requestMatchers("/ecom/order/**").authenticated()                        // Authenticated endpoints
+                                .requestMatchers("/ecom/order/**").authenticated()
+                                .requestMatchers("/ecom/order/**").hasAuthority("CUSTOMER")
+                                .requestMatchers("/ecom/admin/**").hasAuthority("ADMIN")
+                                // Authenticated endpoints
                                 .anyRequest().denyAll()                                                   // Deny all other requests
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)  // Ensure your filter runs before the default one
                 .build();
     }
-
-
-
 
 
     @Bean

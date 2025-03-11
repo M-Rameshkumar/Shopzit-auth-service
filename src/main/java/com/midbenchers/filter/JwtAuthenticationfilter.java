@@ -1,6 +1,5 @@
 package com.midbenchers.filter;
 
-import com.midbenchers.service.jwt.Userdetailsimpl;
 import com.midbenchers.utilli.Jwtutill;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
