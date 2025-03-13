@@ -31,7 +31,7 @@ public class SpringSecurityconfig {
                 .authorizeHttpRequests(auth ->
                         auth
 
-                                .requestMatchers("/ecom/authentication", "/ecom/reg").permitAll()  // Public endpoints
+                                .requestMatchers("/ecom/authentication", "/ecom/reg", "/email/send/**").permitAll()  // Public endpoints
                                 .requestMatchers("/ecom/order/**").authenticated()
                                 .requestMatchers("/ecom/order/**").hasAuthority("CUSTOMER")
                                 .requestMatchers("/ecom/admin/**").hasAuthority("ADMIN")

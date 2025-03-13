@@ -26,6 +26,11 @@ import java.util.Optional;
 public class RegisterUserServiceimpl{
 
 
+    private Emailclient emailclient;
+
+    public RegisterUserServiceimpl(Emailclient emailclient) {
+        this.emailclient = emailclient;
+    }
 
     @Autowired
     private Userrepo userrepo;
@@ -61,6 +66,9 @@ public class RegisterUserServiceimpl{
         User createduser= userrepo.save(data);
 
 
+        emailclient.sent(createduser.getEmail(),"congrats","testing microservice");
+
+
         Profile_entity profile= new Profile_entity(
 
                 createduser.getId(),"","","",0l
@@ -76,7 +84,6 @@ public class RegisterUserServiceimpl{
 
     }
 
-    @Transactional
     @PostConstruct
     public  void Adminlogin() {
 
